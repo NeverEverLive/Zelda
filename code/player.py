@@ -1,9 +1,10 @@
 import pygame
+
 from settings import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups, obstacle_sprites):
+    def __init__(self, position, groups, obstacle_sprites) -> None:
         super().__init__(groups)
         self.image = pygame.image.load('../texture/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
@@ -13,7 +14,7 @@ class Player(pygame.sprite.Sprite):
 
         self.obstacle_sprites = obstacle_sprites
 
-    def input(self):
+    def input(self) -> None:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
             self.direction.y = -1
@@ -29,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
-    def move(self, speed):
+    def move(self, speed) -> None:
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
         
@@ -56,6 +57,6 @@ class Player(pygame.sprite.Sprite):
                     if self.direction.y < 0:
                         self.rect.top = sprite.rect.bottom
 
-    def update(self):
+    def update(self) -> None:
         self.input()
         self.move(self.speed)

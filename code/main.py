@@ -1,4 +1,5 @@
 import pygame, sys
+
 from settings import *
 from level import Level
 
@@ -12,7 +13,6 @@ class Game:
 		self.clock = pygame.time.Clock()
 		self.level = Level()
 
-	
 	def run(self) -> None:
 		while True:
 			for event in pygame.event.get():
