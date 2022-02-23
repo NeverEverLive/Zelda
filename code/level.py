@@ -1,9 +1,11 @@
 import pygame
 from random import choice
 
-from settings import TILESIZE, WORLD_MAP
+from settings import TILESIZE
 from tile import Tile
 from player import Player
+from weapon import Weapon
+from ui import UI
 from utils import import_csv_layout, import_folder
 from debug import debug
 
@@ -15,7 +17,11 @@ class Level:
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
 
+        self.current_attack = None
+
         self.create_map()
+
+        self.ui = UI()
 
     def create_map(self) -> None:
         layouts = {
@@ -43,12 +49,32 @@ class Level:
                             surface = graphics['objects'][int(column)]
                             Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'object', surface)
                             
-        self.player = Player((2000,1430), [self.visible_sprites], self.obstacle_sprites)
+        self.player = Player(
+            (2000,1430), 
+            [self.visible_sprites], 
+            self.obstacle_sprites, 
+            self.create_attack, 
+            self.destroy_attack,
+            self.create_magic
+            )
+
+    def create_attack(self):
+        self.current_attack = Weapon(self.player, [self.visible_sprites])
+
+    def create_magic(self, style, strength, cost):
+        print(style)
+        print(strength)
+        print(cost)
+
+    def destroy_attack(self):
+        if self.current_attack:
+            self.current_attack.kill()
+        self.current_attack = None
 
     def run(self) -> None:
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-
+        self.ui.display(self.player)
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self) -> None:
