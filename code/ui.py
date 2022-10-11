@@ -1,4 +1,3 @@
-from pydoc import describe
 import pygame
 from settings import *
 

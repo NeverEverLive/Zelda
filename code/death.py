@@ -1,4 +1,3 @@
-from curses.textpad import rectangle
 import pygame
 from settings import *
 

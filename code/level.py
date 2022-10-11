@@ -1,4 +1,3 @@
-from sqlite3 import paramstyle
 import pygame
 from random import choice, randint
 
@@ -9,7 +8,6 @@ from weapon import Weapon
 from ui import UI
 from enemy import Enemy
 from utils import import_csv_layout, import_folder
-from debug import debug
 from particles import AnimationPlayer
 from magic import MagicPlayer
 from upgrade import Upgrade

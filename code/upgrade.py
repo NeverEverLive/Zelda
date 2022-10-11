@@ -1,6 +1,3 @@
-from asyncio import current_task
-from tkinter.ttk import Progressbar
-from urllib.parse import ParseResultBytes
 import pygame
 from settings import *
 
