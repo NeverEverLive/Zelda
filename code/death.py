@@ -23,8 +23,6 @@ class Death():
     def display_death_menu(self):
         left = (self.display_surface.get_size()[0]-self.width)//2
         top = (self.display_surface.get_size()[1]-self.height)//2
-        print(left)
-        print(top)
         rectangle = pygame.Rect(left, top, self.width, self.height)
         pygame.draw.rect(self.display_surface, UI_BG_COLOR, rectangle, border_radius=10)
 

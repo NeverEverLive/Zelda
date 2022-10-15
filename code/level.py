@@ -18,6 +18,7 @@ class Level:
         self.display_surface = pygame.display.get_surface()
         self.game_paused = False
         self.player_is_dead = False
+        self.restart = False
 
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
@@ -159,12 +160,14 @@ class Level:
         
         if self.player_is_dead:
             Death().display()
+            self.restart = True
         elif self.game_paused:
             self.upgrade.display()
         else:
             self.visible_sprites.update()
             self.visible_sprites.enemy_update(self.player)
             self.player_attack_logic()
+
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self) -> None:
